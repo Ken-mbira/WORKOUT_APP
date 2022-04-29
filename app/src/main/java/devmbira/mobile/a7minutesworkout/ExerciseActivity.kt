@@ -13,6 +13,7 @@ class ExerciseActivity : AppCompatActivity() {
     private var timerDuration:Long = 10000
     private var pauseOffset:Long = 0
     private var pausedCountDown : Boolean? = null
+    private var restProgress : Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,20 +35,25 @@ class ExerciseActivity : AppCompatActivity() {
                 pauseTimer()
             }else if(pausedCountDown == true){
                 startTimer(pauseOffset)
+                binding?.tvTitle?.text = getString(R.string.getReady)
             }
         }
     }
 
     private fun startTimer(pauseOffSetL:Long){
+        binding?.progressBar?.progress = restProgress
+
         countDownTimer = object : CountDownTimer(timerDuration - pauseOffSetL,1000){
             override fun onTick(p0: Long) {
+                restProgress ++
+                binding?.progressBar?.progress = 10 - restProgress
                 pauseOffset = timerDuration - p0
                 binding?.tvTimer?.text = (p0/1000).toString()
                 pausedCountDown = false
             }
 
             override fun onFinish() {
-                Toast.makeText(this@ExerciseActivity,"The timer finished",Toast.LENGTH_LONG).show()
+                binding?.tvTitle?.text = getString(R.string.timerComplete)
                 pausedCountDown = null
             }
         }.start()
@@ -57,15 +63,17 @@ class ExerciseActivity : AppCompatActivity() {
         if(countDownTimer!=null){
             countDownTimer?.cancel()
             pausedCountDown = true
+            binding?.tvTitle?.text = getString(R.string.timerPaused)
         }
     }
 
-//    private fun resetTimer(){
-//        if(countDownTimer!=null){
-//            countDownTimer?.cancel()
-//            binding?.tvTimer?.text = (timerDuration / 1000).toString()
-//            countDownTimer = null
-//            pauseOffset = 0
-//        }
-//    }
+    override fun onDestroy() {
+        super.onDestroy()
+        if(countDownTimer!=null){
+            countDownTimer?.cancel()
+            pauseOffset = 0
+            restProgress = 0
+        }
+        binding = null
+    }
 }
