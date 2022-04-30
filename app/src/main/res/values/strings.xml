@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">7 Minutes Workout</string>
     <string name="image">workout logo</string>
-    <string name="call_to_action">START</string>
+    <string name="call_to_action" translatable="false">START</string>
     <string name="getReady">GET READY FOR...</string>
     <string name="timerPaused">RESUME</string>
     <string name="timerComplete">GO!!!</string>
+    <string name="timerDone">DONE!!!</string>
 </resources>

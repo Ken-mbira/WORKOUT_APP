@@ -3,13 +3,19 @@ package devmbira.mobile.a7minutesworkout
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.os.Handler
+import android.view.View
 import android.widget.Toast
 import devmbira.mobile.a7minutesworkout.databinding.ActivityExcerciseBinding
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class ExerciseActivity : AppCompatActivity() {
     private var binding: ActivityExcerciseBinding ? = null
 
     private var countDownTimer : CountDownTimer? = null
+    private var exerciseCountDownTimer : CountDownTimer? = null
     private var timerDuration:Long = 10000
     private var pauseOffset:Long = 0
     private var pausedCountDown : Boolean? = null
@@ -53,8 +59,28 @@ class ExerciseActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                binding?.tvTitle?.text = getString(R.string.timerComplete)
-                pausedCountDown = null
+                pauseOffset = 0
+                restProgress = 0
+                binding?.flProgressBar?.visibility = View.INVISIBLE
+                binding?.exerciseFl?.visibility = View.VISIBLE
+                startExerciseTimer(pauseOffset)
+            }
+        }.start()
+    }
+    private fun startExerciseTimer(pauseOffSetL:Long){
+        binding?.exerciseProgressBar?.progress = restProgress
+        binding?.tvTitle?.text = "JUMPING JACKS"
+
+        exerciseCountDownTimer = object : CountDownTimer(timerDuration - pauseOffSetL,1000){
+            override fun onTick(p0: Long) {
+                restProgress ++
+                binding?.exerciseProgressBar?.progress = 10 - restProgress
+                pauseOffset = timerDuration - p0
+                binding?.tvExerciseTimer?.text = (p0/1000).toString()
+            }
+
+            override fun onFinish() {
+                binding?.tvTitle?.text = getString(R.string.timerDone)
             }
         }.start()
     }
