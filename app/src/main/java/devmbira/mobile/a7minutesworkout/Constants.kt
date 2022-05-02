@@ -8,7 +8,8 @@ object Constants {
             "Burpees",
             R.drawable.burpees_exercise,
             isCompleted = false,
-            isSelected = false
+            isSelected = false,
+            10000
         )
         exerciseList.add(burpees)
 
@@ -17,7 +18,8 @@ object Constants {
             "Plank",
             R.drawable.plank_exercise,
             isCompleted = false,
-            isSelected = false
+            isSelected = false,
+            20000
         )
         exerciseList.add(plank)
 
@@ -26,7 +28,8 @@ object Constants {
             "Push Up",
             R.drawable.pushup_exercise,
             isCompleted = false,
-            isSelected = false
+            isSelected = false,
+            15000
         )
         exerciseList.add(pushup)
 
@@ -35,7 +38,8 @@ object Constants {
             "Sideways Plank",
             R.drawable.plank_exercise,
             isCompleted = false,
-            isSelected = false
+            isSelected = false,
+            20000
         )
         exerciseList.add(sidewaysPlank)
 
@@ -44,7 +48,8 @@ object Constants {
             "Sit Up",
             R.drawable.sit_up_exercise,
             isCompleted = false,
-            isSelected = false
+            isSelected = false,
+            30000
         )
         exerciseList.add(sitUp)
         return exerciseList

@@ -55,6 +55,11 @@ class ExerciseActivity : AppCompatActivity() {
         binding?.exerciseFl?.visibility = View.INVISIBLE
         binding?.tvExerciseName?.visibility = View.INVISIBLE
         binding?.ivExerciseImage?.visibility = View.INVISIBLE
+        binding?.upcomingExercise?.visibility = View.VISIBLE
+        binding?.upcomingExerciseName?.visibility = View.VISIBLE
+
+        val upcomingExercise : ExerciseModel = exerciseList!![currentExercisePosition + 1]
+        binding?.upcomingExerciseName?.text = "${upcomingExercise.getName()} for ${upcomingExercise.getDuration()/1000} seconds"
 
         if(restCountDownTimer != null){
             restCountDownTimer?.cancel()
@@ -93,6 +98,8 @@ class ExerciseActivity : AppCompatActivity() {
         binding?.exerciseFl?.visibility = View.VISIBLE
         binding?.tvExerciseName?.visibility = View.VISIBLE
         binding?.ivExerciseImage?.visibility = View.VISIBLE
+        binding?.upcomingExercise?.visibility = View.INVISIBLE
+        binding?.upcomingExerciseName?.visibility = View.INVISIBLE
 
         if(exerciseCountDownTimer !== null){
             exerciseCountDownTimer?.cancel()
@@ -101,16 +108,17 @@ class ExerciseActivity : AppCompatActivity() {
 
         binding?.ivExerciseImage?.setImageResource(exerciseList!![currentExercisePosition].getImage())
         binding?.tvExerciseName?.text = exerciseList!![currentExercisePosition].getName()
-        startExerciseTimer()
+        startExerciseTimer(exerciseList!![currentExercisePosition].getDuration())
     }
 
-    private fun startExerciseTimer(){
+    private fun startExerciseTimer(exerciseDuration:Long){
         binding?.exerciseProgressBar?.progress = exerciseProgress
 
-        exerciseCountDownTimer = object : CountDownTimer(timerDuration,1000){
+        exerciseCountDownTimer = object : CountDownTimer(exerciseDuration,1000){
             override fun onTick(p0: Long) {
                 exerciseProgress ++
-                binding?.exerciseProgressBar?.progress = 10 - exerciseProgress
+                binding?.exerciseProgressBar?.max = (exerciseDuration/1000).toInt()
+                binding?.exerciseProgressBar?.progress = (exerciseDuration/1000).toInt() - exerciseProgress
                 binding?.tvExerciseTimer?.text = (p0/1000).toString()
             }
 

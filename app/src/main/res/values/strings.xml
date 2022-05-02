@@ -6,4 +6,5 @@
     <string name="timerPaused">RESUME</string>
     <string name="timerComplete">GO!!!</string>
     <string name="timerDone">DONE!!!</string>
+    <string name="upcoming_exercise">UPCOMING EXERCISE :</string>
 </resources>

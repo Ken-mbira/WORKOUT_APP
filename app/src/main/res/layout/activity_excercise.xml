@@ -69,6 +69,29 @@
         </LinearLayout>
 
     </FrameLayout>
+    <TextView
+        android:id="@+id/upcoming_exercise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/upcoming_exercise"
+        android:textSize="16sp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/flProgressBar"
+        app:layout_constraintBottom_toTopOf="@id/upcoming_exercise_name"
+        />
+    <TextView
+        android:id="@+id/upcoming_exercise_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/upcoming_exercise"
+        />
+
     <ImageView
         android:id="@+id/ivExerciseImage"
         android:layout_width="match_parent"
@@ -94,9 +117,9 @@
         app:layout_constraintTop_toBottomOf="@+id/ivExerciseImage" />
     <FrameLayout
         android:id="@+id/exerciseFl"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_margin="10dp"
         android:visibility="invisible"
         android:background="@drawable/call_to_action_background"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -105,20 +128,19 @@
         app:layout_constraintTop_toBottomOf="@+id/tvExerciseName">
         <ProgressBar
             android:id="@+id/exerciseProgressBar"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_gravity="center"
             android:background="@drawable/circular_progress_bar_grey"
             android:progressDrawable="@drawable/circular_progress_bar"
             android:indeterminate="false"
-            android:max="10"
             android:progress="100"
             android:rotation="-90"/>
 
         <LinearLayout
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_gravity="center"
             android:background="@drawable/item_circular_color_accent_background"
             android:gravity="center">

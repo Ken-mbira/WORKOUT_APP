@@ -5,7 +5,8 @@ class ExerciseModel(
     private var name : String,
     private var image : Int,
     private var isCompleted: Boolean,
-    private var isSelected: Boolean
+    private var isSelected: Boolean,
+    private var duration : Long
 ) {
     fun getId():Int{
         return id
@@ -39,5 +40,11 @@ class ExerciseModel(
 
     fun setIsSelected(isSelected: Boolean) {
         this.isSelected = isSelected
+    }
+    fun setDuration(duration:Long){
+        this.duration = duration
+    }
+    fun getDuration():Long{
+        return duration
     }
 }
