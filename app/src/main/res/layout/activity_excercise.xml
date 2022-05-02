@@ -69,6 +69,29 @@
         </LinearLayout>
 
     </FrameLayout>
+    <ImageView
+        android:id="@+id/ivExerciseImage"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:contentDescription="@string/image"
+        android:scaleType="fitXY"
+        tools:src="@drawable/pushup_exercise"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/tvExerciseName"
+        app:layout_constraintTop_toBottomOf="@id/toolbarExercise"/>
+
+    <TextView
+        android:id="@+id/tvExerciseName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Exercise Name"
+        android:textColor="@color/colorAccent"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivExerciseImage" />
     <FrameLayout
         android:id="@+id/exerciseFl"
         android:layout_width="100dp"
@@ -79,7 +102,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarExercise">
+        app:layout_constraintTop_toBottomOf="@+id/tvExerciseName">
         <ProgressBar
             android:id="@+id/exerciseProgressBar"
             android:layout_width="100dp"
