@@ -3,13 +3,9 @@ package devmbira.mobile.a7minutesworkout
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.os.Handler
 import android.view.View
 import android.widget.Toast
 import devmbira.mobile.a7minutesworkout.databinding.ActivityExcerciseBinding
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class ExerciseActivity : AppCompatActivity() {
     private var binding: ActivityExcerciseBinding ? = null
@@ -21,6 +17,9 @@ class ExerciseActivity : AppCompatActivity() {
     private var pausedCountDown : Boolean? = null
     private var restProgress : Int = 0
 
+    private var exerciseList : ArrayList<ExerciseModel>? = null
+    private var currentExercisePosition = -1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityExcerciseBinding.inflate(layoutInflater)
@@ -30,23 +29,26 @@ class ExerciseActivity : AppCompatActivity() {
         if(supportActionBar!=null){
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
+
+        exerciseList = Constants.defaultExerciseList()
+
         binding?.toolbarExercise?.setNavigationOnClickListener {
             onBackPressed()
         }
         binding?.tvTimer?.text = (timerDuration/1000).toString()
-        startTimer(pauseOffset)
+        startRestTimer(pauseOffset)
 
         binding?.root?.setOnClickListener {
             if(pausedCountDown == false){
-                pauseTimer()
+                pauseRestTimer()
             }else if(pausedCountDown == true){
-                startTimer(pauseOffset)
+                startRestTimer(pauseOffset)
                 binding?.tvTitle?.text = getString(R.string.getReady)
             }
         }
     }
 
-    private fun startTimer(pauseOffSetL:Long){
+    private fun startRestTimer(pauseOffSetL:Long){
         binding?.progressBar?.progress = restProgress
 
         countDownTimer = object : CountDownTimer(timerDuration - pauseOffSetL,1000){
@@ -61,15 +63,22 @@ class ExerciseActivity : AppCompatActivity() {
             override fun onFinish() {
                 pauseOffset = 0
                 restProgress = 0
-                binding?.flProgressBar?.visibility = View.INVISIBLE
-                binding?.exerciseFl?.visibility = View.VISIBLE
-                startExerciseTimer(pauseOffset)
+                currentExercisePosition ++
+                pausedCountDown = null
+                setUpExerciseTimer()
             }
         }.start()
     }
-    private fun startExerciseTimer(pauseOffSetL:Long){
+
+    private fun setUpExerciseTimer(){
+        binding?.flProgressBar?.visibility = View.INVISIBLE
+        binding?.exerciseFl?.visibility = View.VISIBLE
         binding?.exerciseProgressBar?.progress = restProgress
         binding?.tvTitle?.text = "JUMPING JACKS"
+        startExerciseTimer(pauseOffset)
+    }
+
+    private fun startExerciseTimer(pauseOffSetL:Long){
 
         exerciseCountDownTimer = object : CountDownTimer(timerDuration - pauseOffSetL,1000){
             override fun onTick(p0: Long) {
@@ -85,7 +94,7 @@ class ExerciseActivity : AppCompatActivity() {
         }.start()
     }
 
-    private fun pauseTimer(){
+    private fun pauseRestTimer(){
         if(countDownTimer!=null){
             countDownTimer?.cancel()
             pausedCountDown = true
