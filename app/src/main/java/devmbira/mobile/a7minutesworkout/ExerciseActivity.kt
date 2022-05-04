@@ -1,5 +1,6 @@
 package devmbira.mobile.a7minutesworkout
 
+import android.content.Intent
 import android.media.MediaPlayer
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -20,7 +21,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private var restCountDownTimer : CountDownTimer? = null
     private var exerciseCountDownTimer : CountDownTimer? = null
-    private var timerDuration:Long = 10000
+    private var timerDuration:Long = 1
     private var pauseOffset:Long = 0
     private var pausedCountDown : Boolean? = null
     private var restProgress : Int = 0
@@ -108,7 +109,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private fun startRestTimer(pauseOffSetL:Long){
         binding?.progressBar?.progress = restProgress
 
-        restCountDownTimer = object : CountDownTimer(timerDuration - pauseOffSetL,1000){
+        restCountDownTimer = object : CountDownTimer((timerDuration * 1000) - pauseOffSetL,1000){
             override fun onTick(p0: Long) {
                 restProgress ++
                 binding?.progressBar?.progress = 10 - restProgress
@@ -171,11 +172,8 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                 if(currentExercisePosition < exerciseList?.size!! - 1){
                     setUpRestTimer()
                 }else{
-                    Toast.makeText(
-                        this@ExerciseActivity,
-                        "Congratulations! You have completed the 7 minutes workout.",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    val intent = Intent(this@ExerciseActivity,FinishActivity::class.java)
+                    startActivity(intent)
                 }
             }
         }.start()
