@@ -15,6 +15,13 @@ class FinishActivity : AppCompatActivity() {
         binding = ActivityFinishBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
+        setSupportActionBar(binding?.toolbarFinish)
+        if(supportActionBar!=null){
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        }
+        binding?.toolbarFinish?.setNavigationOnClickListener {
+            onBackPressed()
+        }
         binding?.konfettiView?.start(Presets.rain())
     }
 }

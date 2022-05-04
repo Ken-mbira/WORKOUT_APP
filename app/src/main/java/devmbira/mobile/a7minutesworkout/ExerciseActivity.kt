@@ -163,15 +163,14 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             }
 
             override fun onFinish() {
-
-                exerciseList!![currentExercisePosition].setIsSelected(false)
-                exerciseList!![currentExercisePosition].setIsCompleted(true)
-                exerciseAdapter!!.notifyDataSetChanged()
-
                 binding?.tvExerciseName?.text = getString(R.string.timerDone)
                 if(currentExercisePosition < exerciseList?.size!! - 1){
+                    exerciseList!![currentExercisePosition].setIsSelected(false)
+                    exerciseList!![currentExercisePosition].setIsCompleted(true)
+                    exerciseAdapter!!.notifyDataSetChanged()
                     setUpRestTimer()
                 }else{
+                    finish()
                     val intent = Intent(this@ExerciseActivity,FinishActivity::class.java)
                     startActivity(intent)
                 }
