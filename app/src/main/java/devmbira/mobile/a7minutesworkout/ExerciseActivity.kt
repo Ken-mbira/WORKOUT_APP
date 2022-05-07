@@ -1,5 +1,7 @@
 package devmbira.mobile.a7minutesworkout
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.media.MediaPlayer
 import android.net.Uri
@@ -21,7 +23,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private var restCountDownTimer : CountDownTimer? = null
     private var exerciseCountDownTimer : CountDownTimer? = null
-    private var timerDuration:Long = 1
+    private var timerDuration:Long = 10
     private var pauseOffset:Long = 0
     private var pausedCountDown : Boolean? = null
     private var restProgress : Int = 0
@@ -76,15 +78,6 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     }
 
     private fun setUpRestTimer(){
-
-        try{
-            val soundURI =  Uri.parse("android.resource://devmbira.mobile.a7minutesworkout/" + R.raw.app_src_main_res_raw_press_start)
-            player = MediaPlayer.create(applicationContext,soundURI)
-            player?.isLooping = false
-            player?.start()
-        }catch(e:Exception){
-            e.printStackTrace()
-        }
 
         binding?.flProgressBar?.visibility = View.VISIBLE
         binding?.tvTitle?.visibility = View.VISIBLE
@@ -144,8 +137,6 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             exerciseProgress = 0
         }
 
-        speakOut(exerciseList!![currentExercisePosition].getName())
-
         binding?.ivExerciseImage?.setImageResource(exerciseList!![currentExercisePosition].getImage())
         binding?.tvExerciseName?.text = exerciseList!![currentExercisePosition].getName()
         startExerciseTimer(exerciseList!![currentExercisePosition].getDuration())
@@ -186,6 +177,34 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         }
     }
 
+    private fun backPressDialog(){
+        val builder : AlertDialog.Builder? = let {
+            AlertDialog.Builder(it)
+        }
+
+        builder?.setMessage("Are you sure you want to quit the current exercise?")
+            ?.setTitle("Quit Session")
+            ?.setPositiveButton(
+                R.string.back_to_main,
+                DialogInterface.OnClickListener{
+                    dialog,_ ->
+                    finish()
+                    dialog.dismiss()
+                }
+            )
+            ?.setNegativeButton(
+                R.string.stay_in_session,
+                DialogInterface.OnClickListener{
+                        dialog,_ ->
+                    dialog.dismiss()
+                }
+            )
+
+        val alertDialog:AlertDialog? = builder?.create()
+        alertDialog?.setCancelable(true)
+        alertDialog?.show()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         if(restCountDownTimer!=null){
@@ -213,6 +232,10 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         }else{
             Log.e("TTS","Initialization failed")
         }
+    }
+
+    override fun onBackPressed() {
+        backPressDialog()
     }
 
     private fun speakOut(text:String){
