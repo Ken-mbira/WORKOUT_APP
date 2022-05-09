@@ -38,11 +38,11 @@
     </FrameLayout>
 
     <FrameLayout
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:id="@+id/flBmi"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/flHistory"
         app:layout_constraintBottom_toTopOf="@id/bmiCalcText"
         android:background="@drawable/item_circular_color_accent_background">
         <TextView
@@ -59,10 +59,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/bmiCalculator"
-        android:textSize="32sp"
+        android:textSize="25sp"
         android:gravity="center"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/flHistory"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <FrameLayout
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:id="@+id/flHistory"
+        app:layout_constraintStart_toEndOf="@id/flBmi"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bmiCalcText"
+        android:background="@drawable/item_circular_color_accent_background">
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_calendar"
+            android:contentDescription="@string/history"
+            android:layout_gravity="center"/>
+    </FrameLayout>
+    <TextView
+        android:id="@+id/historyText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/history"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/flBmi"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 
