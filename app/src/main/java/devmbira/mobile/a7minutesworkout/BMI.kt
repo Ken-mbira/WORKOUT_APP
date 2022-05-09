@@ -39,15 +39,22 @@ class BMI : AppCompatActivity() {
             }
         }
 
-        binding?.rbUsUnits?.setOnClickListener {
-            binding?.feetInches?.visibility = View.VISIBLE
-            binding?.tilMetricUnitHeight?.visibility = View.INVISIBLE
+        binding?.rgUnits?.setOnCheckedChangeListener{
+            _,checkedId:Int -> when(checkedId) {
+            R.id.rbMetricUnits -> makeMetricSystemVisible()
+            R.id.rbUsUnits -> makeUsSystemVisible()
         }
+        }
+    }
 
-        binding?.rbMetricUnits?.setOnClickListener {
-            binding?.feetInches?.visibility = View.INVISIBLE
-            binding?.tilMetricUnitHeight?.visibility = View.VISIBLE
-        }
+    private fun makeUsSystemVisible() {
+        binding?.feetInches?.visibility = View.VISIBLE
+        binding?.tilMetricUnitHeight?.visibility = View.INVISIBLE
+    }
+
+    private fun makeMetricSystemVisible() {
+        binding?.feetInches?.visibility = View.INVISIBLE
+        binding?.tilMetricUnitHeight?.visibility = View.VISIBLE
     }
 
     private fun validateMetricUnits():Boolean{
