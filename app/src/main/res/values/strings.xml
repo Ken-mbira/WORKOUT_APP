@@ -10,4 +10,8 @@
     <string name="completeWorkout">Congratulations on finishing your workout!</string>
     <string name="back_to_main">Yes</string>
     <string name="stay_in_session">No</string>
+    <string name="BMI">BMI</string>
+    <string name="bmiCalculator">Calculator</string>
+    <string name="weightHint">WEIGHT (in kg)</string>
+    <string name="heightHint">HEIGHT (in cm)</string>
 </resources>

@@ -10,9 +10,10 @@
         <entry key="app/src/main/res/drawable/item_circular_color_accent_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/item_circular_color_grey_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ripple_call_to_action.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_bmi.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_excercise.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_finish.xml" value="0.14" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_finish.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.18" />
         <entry key="app/src/main/res/layout/item_exercise_status.xml" value="2.0" />
       </map>
     </option>
