@@ -38,6 +38,16 @@ class BMI : AppCompatActivity() {
                 Toast.makeText(this,"Please enter valid values",Toast.LENGTH_LONG).show()
             }
         }
+
+        binding?.rbUsUnits?.setOnClickListener {
+            binding?.feetInches?.visibility = View.VISIBLE
+            binding?.tilMetricUnitHeight?.visibility = View.INVISIBLE
+        }
+
+        binding?.rbMetricUnits?.setOnClickListener {
+            binding?.feetInches?.visibility = View.INVISIBLE
+            binding?.tilMetricUnitHeight?.visibility = View.VISIBLE
+        }
     }
 
     private fun validateMetricUnits():Boolean{
