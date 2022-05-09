@@ -7,6 +7,9 @@
         <entry key="app/src/main/res/drawable/call_to_action_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/circular_progress_bar.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/circular_progress_bar_grey.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/drawable_radio_group_tab_background.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/drawable_units_tab_selector.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/drawable_units_tab_text_color_selector.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/item_circular_color_accent_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/item_circular_color_grey_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ripple_call_to_action.xml" value="0.1" />
